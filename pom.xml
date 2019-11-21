@@ -25,6 +25,7 @@
         <module>cloud-common</module>
         <module>cloud-rabbitmq</module>
         <module>dubbo-provide</module>
+        <module>cloud-bus</module>
     </modules>
     <dependencies>
         <dependency>

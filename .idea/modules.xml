@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/cloud.iml" filepath="$PROJECT_DIR$/cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-bus/cloud-bus.iml" filepath="$PROJECT_DIR$/cloud-bus/cloud-bus.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-client/cloud-client.iml" filepath="$PROJECT_DIR$/cloud-client/cloud-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-common/cloud-common.iml" filepath="$PROJECT_DIR$/cloud-common/cloud-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-gateway/cloud-gateway.iml" filepath="$PROJECT_DIR$/cloud-gateway/cloud-gateway.iml" />

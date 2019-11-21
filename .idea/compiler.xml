@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="cloud-bus" />
         <module name="cloud-client" />
         <module name="cloud-common" />
         <module name="cloud-gateway" />
@@ -21,6 +22,7 @@
       <module name="cloud" target="1.8" />
       <module name="cloud-auth" target="1.8" />
       <module name="cloud-authority" target="1.8" />
+      <module name="cloud-bus" target="1.8" />
       <module name="cloud-client" target="1.8" />
       <module name="cloud-common" target="1.8" />
       <module name="cloud-gateway" target="1.8" />
