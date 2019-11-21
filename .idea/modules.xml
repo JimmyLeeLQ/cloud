@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cloud.iml" filepath="$PROJECT_DIR$/cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-client/cloud-client.iml" filepath="$PROJECT_DIR$/cloud-client/cloud-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-common/cloud-common.iml" filepath="$PROJECT_DIR$/cloud-common/cloud-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-gateway/cloud-gateway.iml" filepath="$PROJECT_DIR$/cloud-gateway/cloud-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-provider/cloud-provider.iml" filepath="$PROJECT_DIR$/cloud-provider/cloud-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-quartz/cloud-quartz.iml" filepath="$PROJECT_DIR$/cloud-quartz/cloud-quartz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-rabbitmq/cloud-rabbitmq.iml" filepath="$PROJECT_DIR$/cloud-rabbitmq/cloud-rabbitmq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-right/cloud-right.iml" filepath="$PROJECT_DIR$/cloud-right/cloud-right.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-server/cloud-server.iml" filepath="$PROJECT_DIR$/cloud-server/cloud-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dubbo-provide/dubbo-provide.iml" filepath="$PROJECT_DIR$/dubbo-provide/dubbo-provide.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: provide
+server:
+  port: 20000
+management:
+  endpoint:
+    dubbo-configs:
+      enabled: true
+    dubbo:
+      enabled: true
+    dubbo-services:
+      enabled: true
+    dubbo-properties:
+      enabled: true
+    dubbo-shutdown:
+      enabled: true
+    dubbo-references:
+      enabled: true
+  health:
+    dubbo:
+      status:
+        defaults: memory
+        extras: load,threadpool
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+dubbo:
+  application:
+    name: provide
+    qos-enable: true
+    qos-port: 20002
+  registry:
+    protocol: zookeeper
+    address: 192.168.0.43:2181,192.168.0.43:2182,192.168.0.43:2183
+    id: dubbo-provide
+  protocol:
+    port: 20001
+    name: dubbo
+    id: dubbo
+    status: server
+  scan:
+    base-packages: com.jimmy.dubbo.provide.service
+
+hello:
+  service:
+    version: 1.0.0

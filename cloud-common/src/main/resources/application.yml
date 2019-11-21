@@ -1,0 +1,38 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: COMMON-SERVICE
+
+server:
+  port: 15001
+eureka:
+  instance:
+        prefer-ip-address: true
+        instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://jimmy:jimmy@192.168.0.43:8080/cloud-server/eureka/
+#      defaultZone: http://jimmy:jimmy@localhost:8001/eureka/
+
+#熔断配置
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000 #断路器超时时间，默认1000ms
+
+# 主键生成器相关配置
+idgenerator:
+  zkConStr: 192.168.0.43:2181,192.168.0.43:2182,192.168.0.43:218
+  parentNodePath: /idgenerator
+  workerPathPrefix: /workerid

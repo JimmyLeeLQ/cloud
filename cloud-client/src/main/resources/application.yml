@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: CONSUME-SERVICE
+server:
+  port: 9001
+eureka:
+  instance:
+        prefer-ip-address: true
+        instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://jimmy:jimmy@localhost:8001/eureka/
+
+security:
+  oauth2:
+    resource:
+      id: CONSUME-SERVICE
+      user-info-uri: http://localhost:8889/auth/api/member
+      prefer-token-info: false

@@ -1,0 +1,98 @@
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: QUARTZ-SERVICE
+  #数据源配置
+  datasource:
+    username: root
+    password: LQhao26!@#
+    url: jdbc:mysql://192.168.0.43:3306/jimmy?characterEncoding=utf8&useSSL=false
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall,log4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
+      # 连接池配置
+      max-active: 20
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      #在空闲连接回收器线程运行期间休眠的时间值,以毫秒为单位，一般比minEvictableIdleTimeMillis小
+      time-between-eviction-runs-millis: 60000
+      #连接池中连接，在时间段内一直空闲，被逐出连接池的时间(1000*60*60)，以毫秒为单位
+      min-evictable-idle-time-millis: 300000
+      # 连接有效性检测
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      validation-query: SELECT 1
+      max-pool-prepared-statement-per-connection-size: 20
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+
+server:
+  port: 10001
+eureka:
+  instance:
+        prefer-ip-address: true
+        instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://jimmy:jimmy@localhost:8001/eureka/
+
+#熔断配置
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 00 #断路器超时时间，默认1000ms
+#security:
+#  oauth2:
+#    resource:
+#      id: QUARTZ-SERVICE
+#      user-info-uri: http://localhost:8889/auth/api/member
+#      prefer-token-info: false
+
+# mybatis配置
+#mybatis:
+#  type-aliases-package: com.jimmy.cloud.right.entity
+#  configuration:
+#    map-underscore-to-camel-case: true  #开启驼峰命名,l_name -> lName
+#    jdbc-type-for-null: NULL
+#    lazy-loading-enabled: true
+#    aggressive-lazy-loading: true
+#    cache-enabled: true #开启二级缓存
+#    #map空列不显示问题
+#    call-setters-on-nulls: true
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  mapper-locations: classpath:mybatis/*.xml
+
+# 打印日志
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.springms: DEBUG

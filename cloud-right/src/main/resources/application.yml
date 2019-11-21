@@ -1,0 +1,97 @@
+server:
+  port: 8888
+
+spring:
+  application:
+      name: RIGHT-SERVICE
+  #  Redis配置
+  redis:
+    host: localhost
+    password:
+    port: 6379
+    timeout: 10000
+    jedis:
+      pool:
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+    database: 1
+  #当遇到同样名字的时候，是否允许覆盖注册
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+      username: root
+      password: LQhao26!@#
+      url: jdbc:mysql://192.168.0.43:3306/jimmy?characterEncoding=utf8&useSSL=false
+      druid:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat,wall,log4j
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        # 合并多个DruidDataSource的监控数据
+        useGlobalDataSourceStat: true
+        # 连接池配置
+        max-active: 20
+        initial-size: 1
+        max-wait: 60000
+        min-idle: 1
+        pool-prepared-statements: true
+        max-open-prepared-statements: 20
+        #在空闲连接回收器线程运行期间休眠的时间值,以毫秒为单位，一般比minEvictableIdleTimeMillis小
+        time-between-eviction-runs-millis: 60000
+        #连接池中连接，在时间段内一直空闲，被逐出连接池的时间(1000*60*60)，以毫秒为单位
+        min-evictable-idle-time-millis: 300000
+        # 连接有效性检测
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        validation-query: SELECT 1
+        max-pool-prepared-statement-per-connection-size: 20
+  #上传文件大小配置
+  servlet:
+    multipart:
+      file-size-threshold: 0
+      max-request-size: 10MB
+      enabled: true
+      max-file-size: 10MB
+  #访问路径配置
+#  mvc:
+#    pathmatch:
+#      use-suffix-pattern: false
+#      use-registered-suffix-pattern: true
+#    contentnegotiation:
+#      favor-path-extension: false
+logging:
+  level:
+    com.jimmy.mp.simple.mapper.sharding.GroupMapper: debug
+#ftp配置
+ftp:
+  enabled: true
+  host: 192.168.0.43
+  port: 21
+  username: root
+  password: 123456
+  encoding: utf-8
+  buffer-size: 8096
+eureka:
+  instance:
+      prefer-ip-address: true
+      instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://jimmy:jimmy@localhost:8001/eureka/
+
+mybatis:
+  type-aliases-package: com.jimmy.cloud.right.entity
+  configuration:
+    map-underscore-to-camel-case: true  #开启驼峰命名,l_name -> lName
+    jdbc-type-for-null: NULL
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: true
+    cache-enabled: true #开启二级缓存
+    #map空列不显示问题
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mybatis/*.xml

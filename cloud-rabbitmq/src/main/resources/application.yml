@@ -1,0 +1,61 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: RABBITMQ-SERVICE
+  rabbitmq:
+    host: 192.168.0.43
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    # 开启发送确认
+    publisher-confirms: true
+    # 开启发送失败退回
+    publisher-returns: true
+    listener:
+      direct:
+        retry:
+          enabled: true #消费者端的重试
+      simple:
+        retry:
+          enabled: true #消费者端的重试
+        auto-startup: true  #启动时自动启动容器	true
+        default-requeue-rejected: true  #投递失败时是否重新排队
+    template:
+      reply-timeout: 10000 #超时时间
+      retry:
+        enabled: true  #设置为true的时候RabbitTemplate(生产端)能够实现重试
+        initial-interval: 1000  #第一次与第二次发布消息的时间间隔 1000
+        max-attempts: 3 #尝试发布消息的最大数量 3
+        max-interval: 10000  #尝试发布消息的最大时间间隔 10000
+        multiplier: 1.0  #上一次尝试时间间隔的乘数 1.0
+
+server:
+  port: 16001
+eureka:
+  instance:
+        prefer-ip-address: true
+        instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://jimmy:jimmy@192.168.0.43:8080/cloud-server/eureka/,http://jimmy:jimmy@localhost:8001/eureka/
+#      defaultZone: http://jimmy:jimmy@localhost:8001/eureka/
+
+#熔断配置
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000 #断路器超时时间，默认1000ms
+
+
