@@ -12,6 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableCircuitBreaker
 public class CommonApp {
     public static void main(String[] args){
+        //201911211654
         SpringApplication.run(CommonApp.class,args);
     }
 }
